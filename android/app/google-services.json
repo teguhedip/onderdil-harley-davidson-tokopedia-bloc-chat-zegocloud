@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "402878178777",
-    "project_id": "fic-mini-project",
-    "storage_bucket": "fic-mini-project.appspot.com"
+    "project_number": "933806673942",
+    "project_id": "onderdil-harley-davidson",
+    "storage_bucket": "onderdil-harley-davidson.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:402878178777:android:c065f222fbcb7a9666e5c8",
+        "mobilesdk_app_id": "1:933806673942:android:f5c8defaf6e835d3d86537",
         "android_client_info": {
           "package_name": "com.example.capek_ngoding_web"
         }
       },
       "oauth_client": [
         {
-          "client_id": "402878178777-d06q9i2dagt3spit0fqu7gbj9bo5r961.apps.googleusercontent.com",
+          "client_id": "933806673942-6fjov510r9lfmcu19mbpfeq11erodlei.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyByQXGw5sfeUEnQ-z-WO7rUVBB_HGW_OjE"
+          "current_key": "AIzaSyD3Yn07cQGsjhhjo0GMq_YKO248efYkG4c"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "402878178777-d06q9i2dagt3spit0fqu7gbj9bo5r961.apps.googleusercontent.com",
+              "client_id": "933806673942-6fjov510r9lfmcu19mbpfeq11erodlei.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
