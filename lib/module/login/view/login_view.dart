@@ -16,7 +16,8 @@ class LoginView extends StatefulWidget {
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: NetworkImage(
-                  "https://i.ibb.co/Y20L5Mr/photo-1502899576159-f224dc2349fa-ixlib-rb-4-0.jpg",
+                  // "https://i.ibb.co/Y20L5Mr/photo-1502899576159-f224dc2349fa-ixlib-rb-4-0.jpg",
+                  "https://wallpapercave.com/wp/2Ecgapu.jpg",
                 ),
                 fit: BoxFit.cover,
               ),
@@ -36,9 +37,12 @@ class LoginView extends StatefulWidget {
                 children: [
                   Image.asset(
                     "assets/icon/icon.png",
-                    width: Get.width / 1.6,
-                    height: Get.width / 1.6,
+                    width: Get.width / 3,
+                    height: Get.width / 3,
                     fit: BoxFit.fill,
+                  ),
+                  const SizedBox(
+                    height: 20.0,
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width,

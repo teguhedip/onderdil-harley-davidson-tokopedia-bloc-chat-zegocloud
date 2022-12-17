@@ -1,8 +1,6 @@
 // import 'package:example/firebase_options.dart';
 import 'dart:io';
 
-// import 'package:example/firebase_options.dart'; //TODO disable by teguh
-
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
@@ -12,7 +10,7 @@ Future initialize() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (!kIsWeb && !Platform.isWindows) {
     await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform, //TODO disable by teguh
+      options: DefaultFirebaseOptions.currentPlatform,
     );
   }
 }
