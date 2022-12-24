@@ -1,3 +1,4 @@
+import 'package:example/shared/widget/edit_profile/edit_profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:example/core.dart';
@@ -53,6 +54,22 @@ class ProfileView extends StatefulWidget {
                   fontSize: 14.0,
                   fontWeight: FontWeight.bold,
                 ),
+              ),
+              const SizedBox(
+                height: 10.0,
+              ),
+              ElevatedButton.icon(
+                icon: const Icon(Icons.edit_note),
+                label: const Text("Edit Profile"),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                ),
+                onPressed: () {
+                  Get.to(EditProfile(
+                    imageUrl: FirebaseAuth.instance.currentUser!.photoURL ?? "",
+                    profileName: AuthService.currentUser!.displayName ?? "",
+                  ));
+                },
               ),
             ],
           ),
