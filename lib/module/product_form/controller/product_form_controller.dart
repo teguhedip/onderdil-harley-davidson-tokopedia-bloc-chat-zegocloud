@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:example/state_util.dart';
-import '../view/product_form_view.dart';
+import "package:example/core.dart";
 
 class ProductFormController extends State<ProductFormView>
     implements MvcController {
   static late ProductFormController instance;
   late ProductFormView view;
+
+  late int id;
+  // late String imageUrl;
+  late String productName;
+  late int price;
+  late int quantity;
+  late String category;
+  late String description;
 
   @override
   void initState() {
@@ -18,4 +25,20 @@ class ProductFormController extends State<ProductFormView>
 
   @override
   Widget build(BuildContext context) => widget.build(context, this);
+
+  add() async {
+    LocalProductService.add(
+      {
+        "id": const Uuid(),
+        // "photo": imageUrl,
+        "product_name": productName,
+        "price": price,
+        "quantity": quantity,
+        "category": category,
+        "description": description,
+      },
+    );
+
+    setState(() {});
+  }
 }

@@ -1,4 +1,4 @@
-import 'package:example/shared/widget/edit_profile/edit_profile.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:example/core.dart';
@@ -8,6 +8,11 @@ class ProfileView extends StatefulWidget {
 
   Widget build(context, ProfileController controller) {
     controller.view = this;
+
+    // final Stream<QuerySnapshot> studentRecords =
+    //     FirebaseFirestore.instance.collection('users').snapshots();
+
+    // print("AuthService.currentUser ${AuthService.currentUser!.uid}");
 
     return Scaffold(
       appBar: AppBar(
@@ -30,49 +35,85 @@ class ProfileView extends StatefulWidget {
         child: Container(
           width: MediaQuery.of(context).size.width,
           padding: const EdgeInsets.all(10.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              CircleAvatar(
-                radius: Get.width / 6,
-                backgroundImage: NetworkImage(
-                  FirebaseAuth.instance.currentUser!.photoURL ??
-                      "https://i.ibb.co/S32HNjD/no-image.jpg",
-                ),
-              ),
-              Text(
-                "${AuthService.currentUser!.displayName}",
-                style: const TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                "${AuthService.currentUser!.email}",
-                style: const TextStyle(
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(
-                height: 10.0,
-              ),
-              ElevatedButton.icon(
-                icon: const Icon(Icons.edit_note),
-                label: const Text("Edit Profile"),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
-                ),
-                onPressed: () {
-                  Get.to(EditProfile(
-                    imageUrl: FirebaseAuth.instance.currentUser!.photoURL ?? "",
-                    profileName: AuthService.currentUser!.displayName ?? "",
-                  ));
-                },
-              ),
-            ],
-          ),
+          child: StreamBuilder<DocumentSnapshot<Object?>>(
+              stream: userCollection.snapshots(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) return const Text('No Data...');
+
+                if (snapshot.hasError) {
+                  return const Text("Error... something wrong");
+                }
+
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Text("Loading....");
+                }
+
+                Map<String, dynamic> item =
+                    (snapshot.data!.data() as Map<String, dynamic>);
+                item["id"] = snapshot.data!.id;
+
+                // final List firebaseData = [];
+                // snapshot.data?.docs.map((DocumentSnapshot documentSnapshot) {
+                //   Map store = documentSnapshot.data() as Map<String, dynamic>;
+                //   firebaseData.add(store);
+                //   store['id'] = documentSnapshot.id;
+                //   print("documentSnapshot ===== $documentSnapshot.id");
+                // }).toList();
+
+                // print("firebaseData ===== ${firebaseData.length}");
+                // print("firebaseData ===== $firebaseData");
+
+                // print("firebaseData ===== ${firebaseData[0]['name']}");
+                // print("firebaseData ===== ${firebaseData[0]['email']}");
+
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    CircleAvatar(
+                      radius: Get.width / 6,
+                      backgroundImage: NetworkImage(
+                        // "${firebaseData['photo']}",
+                        FirebaseAuth.instance.currentUser!.photoURL ??
+                            "https://i.ibb.co/S32HNjD/no-image.jpg",
+                      ),
+                    ),
+                    Text(
+                      // "${AuthService.currentUser!.displayName}",
+                      "${item["name"]}",
+                      style: const TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      "${AuthService.currentUser!.email}",
+                      style: const TextStyle(
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10.0,
+                    ),
+                    ElevatedButton.icon(
+                      icon: const Icon(Icons.edit_note),
+                      label: const Text("Edit Profile"),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green,
+                      ),
+                      onPressed: () {
+                        Get.to(EditProfile(
+                          imageUrl:
+                              FirebaseAuth.instance.currentUser!.photoURL ?? "",
+                          profileName: item["name"] ?? "",
+                          id: AuthService.currentUser!.uid,
+                        ));
+                      },
+                    ),
+                  ],
+                );
+              }),
         ),
       ),
     );

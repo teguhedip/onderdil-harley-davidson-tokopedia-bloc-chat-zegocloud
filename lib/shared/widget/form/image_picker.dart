@@ -71,7 +71,8 @@ class _QImagePickerState extends State<QImagePicker> {
     });
 
     var res = await Dio().post(
-      'https://api.imgbb.com/1/upload?key=b55ef3fd02b80ab180f284e479acd7c4',
+      // 'https://api.imgbb.com/1/upload?key=b55ef3fd02b80ab180f284e479acd7c4',
+      'https://api.imgbb.com/1/upload?key=e3b3e65e3a00b5e45eb30b283e3bd5ea',
       data: formData,
     );
 

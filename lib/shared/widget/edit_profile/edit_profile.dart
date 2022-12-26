@@ -5,10 +5,13 @@ import 'package:flutter/material.dart';
 import '../../../core.dart';
 
 class EditProfile extends StatefulWidget {
-  final String imageUrl;
-  final String profileName;
-  const EditProfile({
+  String imageUrl;
+  String profileName;
+  String id;
+
+  EditProfile({
     Key? key,
+    required this.id,
     required this.imageUrl,
     required this.profileName,
   }) : super(key: key);
@@ -33,12 +36,17 @@ class _EditProfileState extends State<EditProfile> {
               QImagePicker(
                 label: "avatar image",
                 value: widget.imageUrl,
-                onChanged: (p0) {},
+                onChanged: (value) {
+                  print("value imageUrl ========== $value");
+                  widget.imageUrl = value.toString();
+                },
               ),
               QTextField(
                 label: "profile name",
                 value: widget.profileName,
-                onChanged: (p0) {},
+                onChanged: (value) {
+                  widget.profileName = value;
+                },
               ),
               const SizedBox(
                 height: 10.0,
@@ -49,7 +57,14 @@ class _EditProfileState extends State<EditProfile> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blueAccent,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  UserProfile.Update(
+                    widget.id,
+                    widget.profileName,
+                    widget.imageUrl,
+                  );
+                  Navigator.pop(context);
+                },
               ),
             ],
           ),

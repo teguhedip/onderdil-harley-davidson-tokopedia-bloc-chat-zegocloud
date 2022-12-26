@@ -11,7 +11,19 @@ class ProductListView extends StatefulWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("GjProductList"),
-        actions: const [],
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: ElevatedButton.icon(
+              icon: const Icon(Icons.add),
+              label: const Text("Add"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 255, 12, 12),
+              ),
+              onPressed: () => controller.add(),
+            ),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Container(

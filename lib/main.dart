@@ -13,6 +13,12 @@ void main() async {
   }
 
   mainStorage = await Hive.openBox('mainStorage');
+
+  // TG Start
+
+  await LocalProductService.load();
+  // TG End
+
   return runApp(MaterialApp(
     title: 'POS',
     navigatorKey: Get.navigatorKey,
