@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "933806673942-gek6g2kthahmuesrfmce04cgs3tro007.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.capek_ngoding_web",
+            "certificate_hash": "0dd6309f57a249ec39b3c9a5a9fef8ac191e6595"
+          }
+        },
+        {
           "client_id": "933806673942-6fjov510r9lfmcu19mbpfeq11erodlei.apps.googleusercontent.com",
           "client_type": 3
         }

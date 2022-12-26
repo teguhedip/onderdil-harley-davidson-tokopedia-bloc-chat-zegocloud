@@ -16,8 +16,22 @@ class CategoryListView extends StatefulWidget {
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(10.0),
-          child: Column(
-            children: const [],
+          child: Expanded(
+            child: SizedBox(
+              height: 200,
+              child: ListView.builder(
+                itemCount: controller.products.length,
+                itemBuilder: (context, index) {
+                  var item = controller.products[index];
+
+                  return Card(
+                    child: ListTile(
+                      title: Text("${item["category"]}"),
+                    ),
+                  );
+                },
+              ),
+            ),
           ),
         ),
       ),

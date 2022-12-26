@@ -21,15 +21,15 @@ class PosView extends StatefulWidget {
                 itemCount: controller.products.length,
                 itemBuilder: (context, index) {
                   var item = controller.products[index];
-                  item["qty"] = item["qty"] ?? 0;
+                  // item["qty"] = item["qty"] ?? 0;
                   return Card(
                     child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: Colors.grey[200],
-                        backgroundImage: NetworkImage(
-                          item["photo"],
-                        ),
-                      ),
+                      // leading: CircleAvatar(
+                      //   backgroundColor: Colors.grey[200],
+                      //   backgroundImage: NetworkImage(
+                      //     item["photo"],
+                      //   ),
+                      // ),
                       title: Text("${item["product_name"]}"),
                       subtitle: Text("${item["price"]} USD"),
                       trailing: SizedBox(
@@ -43,7 +43,7 @@ class PosView extends StatefulWidget {
                               child: Center(
                                 child: IconButton(
                                   onPressed: () {
-                                    item["qty"]--;
+                                    item["quantity"]--;
                                     controller.setState(() {});
                                   },
                                   icon: const Icon(
@@ -57,7 +57,7 @@ class PosView extends StatefulWidget {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                "${item["qty"]}",
+                                "${item["quantity"]}",
                                 style: const TextStyle(
                                   fontSize: 14,
                                 ),
@@ -69,7 +69,7 @@ class PosView extends StatefulWidget {
                               child: Center(
                                 child: IconButton(
                                   onPressed: () {
-                                    item["qty"]++;
+                                    item["quantity"]++;
                                     controller.setState(() {});
                                   },
                                   icon: const Icon(

@@ -1,13 +1,15 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:convert';
 import 'dart:math';
+
 import 'package:example/core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class PosController extends State<PosView> implements MvcController {
   static late PosController instance;
   late PosView view;
+  final products = LocalProductService.products;
 
   @override
   void initState() {
@@ -21,7 +23,8 @@ class PosController extends State<PosView> implements MvcController {
   @override
   Widget build(BuildContext context) => widget.build(context, this);
 
-  List products = [
+  //TODO delete after finish
+  List productsOri = [
     {
       "id": 1,
       "photo":
@@ -145,7 +148,11 @@ class PosController extends State<PosView> implements MvcController {
   ];
 
   doCheckout() async {
+    print("START do Ceckout==========================");
+    print("UUID === ${FirebaseAuth.instance.currentUser!.uid}");
+    print("PRODUCS $products");
     //Atur point menjadi 10% dari total
+
     var qrCodeString = jsonEncode({
       "total": Random().nextInt(3000),
       "point": Random().nextInt(3000),
@@ -172,6 +179,8 @@ class PosController extends State<PosView> implements MvcController {
         ),
       ],
     );
+
+    print("do Ceckout==========================");
     Get.back();
   }
 }

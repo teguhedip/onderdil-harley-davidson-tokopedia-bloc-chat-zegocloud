@@ -40,5 +40,7 @@ class ProductFormController extends State<ProductFormView>
     );
 
     setState(() {});
+    Get.back();
+    showInfoDialog("Success Add Product");
   }
 }

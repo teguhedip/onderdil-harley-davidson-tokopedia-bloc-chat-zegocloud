@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:example/core.dart';
-import '../controller/product_list_controller.dart';
 
 class ProductListView extends StatefulWidget {
   const ProductListView({Key? key}) : super(key: key);
@@ -29,7 +28,39 @@ class ProductListView extends StatefulWidget {
         child: Container(
           padding: const EdgeInsets.all(10.0),
           child: Column(
-            children: const [],
+            children: [
+              ListView.builder(
+                itemCount: controller.products.length,
+                shrinkWrap: true,
+                itemBuilder: (BuildContext context, int index) {
+                  var item = controller.products[index];
+                  return InkWell(
+                    onTap: () {
+                      controller.delete(item);
+                    },
+                    child: Card(
+                      child: ListTile(
+                        title: Text("${item["product_name"]} "),
+                        subtitle: Row(
+                          children: [
+                            Text("USD ${item["price"]}"),
+                            const Spacer(),
+                            Text("(stock:${item["quantity"]})"),
+                          ],
+                        ),
+                        trailing: IconButton(
+                          onPressed: () => controller.update(index, item),
+                          icon: const Icon(
+                            Icons.edit,
+                            size: 24.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
         ),
       ),
