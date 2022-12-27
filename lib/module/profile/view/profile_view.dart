@@ -73,9 +73,9 @@ class ProfileView extends StatefulWidget {
                     CircleAvatar(
                       radius: Get.width / 6,
                       backgroundImage: NetworkImage(
-                        // "${firebaseData['photo']}",
-                        FirebaseAuth.instance.currentUser!.photoURL ??
+                        "${item["photo"]}" ??
                             "https://i.ibb.co/S32HNjD/no-image.jpg",
+                        // FirebaseAuth.instance.currentUser!.photoURL ?? "https://i.ibb.co/S32HNjD/no-image.jpg",
                       ),
                     ),
                     Text(

@@ -40,6 +40,12 @@ class ProductListView extends StatefulWidget {
                     },
                     child: Card(
                       child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: Colors.grey[200],
+                          backgroundImage: NetworkImage(
+                            item["photo"],
+                          ),
+                        ),
                         title: Text("${item["product_name"]} "),
                         subtitle: Row(
                           children: [

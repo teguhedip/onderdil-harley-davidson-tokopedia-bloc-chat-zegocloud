@@ -147,10 +147,22 @@ class PosController extends State<PosView> implements MvcController {
     },
   ];
 
+  List productsToQr = [
+    {
+      "id": 1,
+      "photo":
+          "https://i.ibb.co/dG68KJM/photo-1513104890138-7c749659a591-crop-entropy-cs-tinysrgb-fit-max-fm-jpg-ixid-Mnwy-ODA4-ODh8-MHwxf-H.jpg",
+      "product_name": "Frenzy Pizza",
+      "price": 25,
+      "category": "Food",
+      "description":
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    }
+  ];
   doCheckout() async {
-    print("START do Ceckout==========================");
     print("UUID === ${FirebaseAuth.instance.currentUser!.uid}");
     print("PRODUCS $products");
+
     //Atur point menjadi 10% dari total
 
     var qrCodeString = jsonEncode({

@@ -7,7 +7,7 @@ class ProductFormController extends State<ProductFormView>
   late ProductFormView view;
 
   late int id;
-  // late String imageUrl;
+  late String imageUrl;
   late String productName;
   late int price;
   late int quantity;
@@ -30,7 +30,7 @@ class ProductFormController extends State<ProductFormView>
     LocalProductService.add(
       {
         "id": const Uuid(),
-        // "photo": imageUrl,
+        "photo": imageUrl,
         "product_name": productName,
         "price": price,
         "quantity": quantity,

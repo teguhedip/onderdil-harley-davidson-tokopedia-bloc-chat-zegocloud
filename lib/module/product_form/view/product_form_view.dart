@@ -28,13 +28,12 @@ class ProductFormView extends StatefulWidget {
               6. Descriptin
                */
 
-              // QImagePicker(
-              //   label: "Product image",
-              //   onChanged: (val) {
-              //     log("val Image piqer $val");
-              //     controller.imageUrl = val;
-              //   },
-              // ),
+              QImagePicker(
+                label: "Product image",
+                onChanged: (val) {
+                  controller.imageUrl = val;
+                },
+              ),
               QTextField(
                 label: "Product name",
                 validator: Validator.required,

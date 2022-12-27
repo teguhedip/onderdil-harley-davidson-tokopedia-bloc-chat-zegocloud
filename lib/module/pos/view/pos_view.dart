@@ -24,12 +24,12 @@ class PosView extends StatefulWidget {
                   // item["qty"] = item["qty"] ?? 0;
                   return Card(
                     child: ListTile(
-                      // leading: CircleAvatar(
-                      //   backgroundColor: Colors.grey[200],
-                      //   backgroundImage: NetworkImage(
-                      //     item["photo"],
-                      //   ),
-                      // ),
+                      leading: CircleAvatar(
+                        backgroundColor: Colors.grey[200],
+                        backgroundImage: NetworkImage(
+                          item["photo"],
+                        ),
+                      ),
                       title: Text("${item["product_name"]}"),
                       subtitle: Text("${item["price"]} USD"),
                       trailing: SizedBox(
