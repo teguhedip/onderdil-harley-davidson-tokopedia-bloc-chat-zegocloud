@@ -88,6 +88,42 @@ class PosView extends StatefulWidget {
                 },
               ),
             ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: QDropdownField(
+                      label: "Payment",
+                      hint: "Your payment method",
+                      validator: Validator.required,
+                      items: const [
+                        {
+                          "label": "Cash",
+                          "value": 1,
+                        },
+                        {
+                          "label": "OVO",
+                          "value": 2,
+                        },
+                        {
+                          "label": "Dana",
+                          "value": 3,
+                        },
+                        {
+                          "label": "Gopay",
+                          "value": 4,
+                        }
+                      ],
+                      onChanged: (value, label) {},
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 20.0,
+                  ),
+                ],
+              ),
+            ),
             Container(
               padding: const EdgeInsets.all(12.0),
               width: MediaQuery.of(context).size.width,
