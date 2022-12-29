@@ -1,4 +1,6 @@
-import 'package:example/core.dart';
+import 'package:hive/hive.dart';
+
+Box mainStorage = Hive.box("mainStorage");
 
 class LocalProductService {
   static List products = [];

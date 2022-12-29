@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:example/core.dart';
+import 'package:example/service/order_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -9,11 +9,17 @@ import 'package:qr_flutter/qr_flutter.dart';
 class PosController extends State<PosView> implements MvcController {
   static late PosController instance;
   late PosView view;
+
   final products = LocalProductService.products;
+
+  late String paymentMethod;
+  late double total;
+  late double poin;
 
   @override
   void initState() {
     instance = this;
+    OrderService.init();
     super.initState();
   }
 
@@ -149,7 +155,7 @@ class PosController extends State<PosView> implements MvcController {
 
   List productsToQr = [
     {
-      "id": 1,
+      "id": 1, //TODO 3 => where from is ID?
       "photo":
           "https://i.ibb.co/dG68KJM/photo-1513104890138-7c749659a591-crop-entropy-cs-tinysrgb-fit-max-fm-jpg-ixid-Mnwy-ODA4-ODh8-MHwxf-H.jpg",
       "product_name": "Frenzy Pizza",
@@ -159,17 +165,18 @@ class PosController extends State<PosView> implements MvcController {
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     }
   ];
+
   doCheckout() async {
-    print("UUID === ${FirebaseAuth.instance.currentUser!.uid}");
-    print("PRODUCS $products");
+    total = OrderService.total;
+    poin = total * (10 / 100);
 
     //Atur point menjadi 10% dari total
 
     var qrCodeString = jsonEncode({
-      "total": Random().nextInt(3000),
-      "point": Random().nextInt(3000),
-      "items": products,
-      "payment_method": "Cash", //Dana | OVO | Gopay
+      "total": total,
+      "point": poin,
+      "items": productsToQr,
+      "payment_method": paymentMethod, //"Dana" | OVO | Gopay
       "vendor": {
         "id": FirebaseAuth.instance.currentUser!.uid,
         "email": FirebaseAuth.instance.currentUser!.email,
@@ -181,8 +188,8 @@ class PosController extends State<PosView> implements MvcController {
       title: "Order success",
       children: [
         SizedBox(
-          height: 120.0,
-          width: 120.0,
+          height: 250.0,
+          width: 250.0,
           child: QrImage(
             data: qrCodeString,
             version: QrVersions.auto,
@@ -192,7 +199,6 @@ class PosController extends State<PosView> implements MvcController {
       ],
     );
 
-    print("do Ceckout==========================");
     Get.back();
   }
 }

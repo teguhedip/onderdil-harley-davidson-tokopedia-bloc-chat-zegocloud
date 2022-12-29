@@ -1,7 +1,5 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-
 import '../../../core.dart';
 
 class QImagePicker extends StatefulWidget {
@@ -11,6 +9,7 @@ class QImagePicker extends StatefulWidget {
   final String? Function(String?)? validator;
   final bool obscure;
   final Function(String) onChanged;
+  final String? provider;
 
   const QImagePicker({
     Key? key,
@@ -20,6 +19,7 @@ class QImagePicker extends StatefulWidget {
     this.hint,
     required this.onChanged,
     this.obscure = false,
+    this.provider = "cloudinary",
   }) : super(key: key);
 
   @override
@@ -63,6 +63,13 @@ class _QImagePickerState extends State<QImagePicker> {
   }
 
   Future<String?> uploadFile(String filePath) async {
+    if (widget.provider == "cloudinary") {
+      return await uploadToCloudinary(filePath);
+    }
+    return await uploadToImgBB(filePath);
+  }
+
+  Future<String> uploadToImgBB(String filePath) async {
     final formData = FormData.fromMap({
       'image': MultipartFile.fromBytes(
         File(filePath).readAsBytesSync(),
@@ -78,6 +85,29 @@ class _QImagePickerState extends State<QImagePicker> {
     var data = res.data["data"];
     var url = data["url"];
     widget.onChanged(url);
+    return url;
+  }
+
+  Future<String> uploadToCloudinary(String filePath) async {
+    String cloudName = "dotz74j1p";
+    String apiKey = "983354314759691";
+    String apiSecret = "pw3e4KZX9Y9qv0zv68voHUtXKvQ";
+
+    final formData = FormData.fromMap({
+      'file': MultipartFile.fromBytes(
+        File(filePath).readAsBytesSync(),
+        filename: "upload.jpg",
+      ),
+      'upload_preset': 'yogjjkoh',
+      'api_key': apiKey,
+    });
+
+    var res = await Dio().post(
+      'https://api.cloudinary.com/v1_1/$cloudName/image/upload',
+      data: formData,
+    );
+
+    String url = res.data["secure_url"];
     return url;
   }
 
@@ -97,7 +127,11 @@ class _QImagePickerState extends State<QImagePicker> {
 
     imageUrl = await uploadFile(filePath);
     loading = false;
-    controller.text = imageUrl!;
+
+    if (imageUrl != null) {
+      widget.onChanged(imageUrl!);
+      controller.text = imageUrl!;
+    }
     setState(() {});
   }
 

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:example/module/product_form/view/product_form_view.dart';
 import 'package:example/service/local_product_service.dart';
 import 'package:example/shared/util/dialog/confirmation_dialog.dart';
@@ -28,7 +26,7 @@ class ProductListController extends State<ProductListView>
   Widget build(BuildContext context) => widget.build(context, this);
 
   add() async {
-    Get.to(const ProductFormView());
+    Get.to(ProductFormView());
     setState(() {});
   }
 
@@ -41,8 +39,12 @@ class ProductListController extends State<ProductListView>
   }
 
   update(int index, Map item) {
-    item["price"] = Random().nextInt(100);
-    LocalProductService.update(index, item);
+    // item["price"] = Random().nextInt(100);
+    Get.to(ProductFormView(
+      index: index,
+      item: item,
+    ));
+    // LocalProductService.update(index, item);
     setState(() {});
   }
 }

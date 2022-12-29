@@ -1,3 +1,4 @@
+import 'package:example/service/order_service.dart';
 import 'package:flutter/material.dart';
 import 'package:example/core.dart';
 
@@ -18,10 +19,10 @@ class PosView extends StatefulWidget {
           children: [
             Expanded(
               child: ListView.builder(
-                itemCount: controller.products.length,
+                itemCount: OrderService.products.length,
                 itemBuilder: (context, index) {
-                  var item = controller.products[index];
-                  // item["qty"] = item["qty"] ?? 0;
+                  var item = OrderService.products[index];
+                  item["qty"] = item["qty"] ?? 0;
                   return Card(
                     child: ListTile(
                       leading: CircleAvatar(
@@ -31,7 +32,8 @@ class PosView extends StatefulWidget {
                         ),
                       ),
                       title: Text("${item["product_name"]}"),
-                      subtitle: Text("${item["price"]} USD"),
+                      subtitle: Text(
+                          "${item["price"]} USD | stock: ${item["quantity"]} "),
                       trailing: SizedBox(
                         width: 120.0,
                         child: Row(
@@ -43,8 +45,15 @@ class PosView extends StatefulWidget {
                               child: Center(
                                 child: IconButton(
                                   onPressed: () {
-                                    item["quantity"]--;
-                                    controller.setState(() {});
+                                    if (item["qty"] > 0) {
+                                      item["quantity"]++;
+                                      item["qty"]--;
+                                      controller.setState(() {});
+                                      // controller.totalProduct(
+                                      //     item["qty"], item["price"]);
+                                      //tambah qty
+                                    }
+                                    // kurangi totalProducto
                                   },
                                   icon: const Icon(
                                     Icons.remove,
@@ -57,7 +66,7 @@ class PosView extends StatefulWidget {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                "${item["quantity"]}",
+                                "${item["qty"]}",
                                 style: const TextStyle(
                                   fontSize: 14,
                                 ),
@@ -69,8 +78,14 @@ class PosView extends StatefulWidget {
                               child: Center(
                                 child: IconButton(
                                   onPressed: () {
-                                    item["quantity"]++;
-                                    controller.setState(() {});
+                                    if (item["quantity"] > 0) {
+                                      item["quantity"]--;
+                                      item["qty"]++;
+                                      controller.setState(() {});
+
+                                      // controller.totalProduct(
+                                      //     item["qty"], item["price"]);
+                                    }
                                   },
                                   icon: const Icon(
                                     Icons.add,
@@ -100,28 +115,40 @@ class PosView extends StatefulWidget {
                       items: const [
                         {
                           "label": "Cash",
-                          "value": 1,
+                          "value": "cash",
                         },
                         {
                           "label": "OVO",
-                          "value": 2,
+                          "value": "ovo",
                         },
                         {
                           "label": "Dana",
-                          "value": 3,
+                          "value": "dana",
                         },
                         {
                           "label": "Gopay",
-                          "value": 4,
+                          "value": "gopay",
                         }
                       ],
-                      onChanged: (value, label) {},
+                      onChanged: (value, label) {
+                        controller.paymentMethod = value;
+                      },
                     ),
                   ),
                   const SizedBox(
                     width: 20.0,
                   ),
                 ],
+              ),
+            ),
+            Container(
+              alignment: Alignment.centerRight,
+              child: Text(
+                "Total: ${OrderService.total}",
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             Container(

@@ -59,12 +59,11 @@ class ProfileView extends StatefulWidget {
                 //   store['id'] = documentSnapshot.id;
                 //   print("documentSnapshot ===== $documentSnapshot.id");
                 // }).toList();
-
                 // print("firebaseData ===== ${firebaseData.length}");
                 // print("firebaseData ===== $firebaseData");
-
                 // print("firebaseData ===== ${firebaseData[0]['name']}");
                 // print("firebaseData ===== ${firebaseData[0]['email']}");
+                print(" Item Phpoto ====${item["photo"]}");
 
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,

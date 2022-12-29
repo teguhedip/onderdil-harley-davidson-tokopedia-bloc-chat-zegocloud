@@ -1,4 +1,5 @@
 {
+    "openai_key": "sk-xn2pSfSBLo94UPxgBbGQT3BlbkFJtWVT1jPhXwGhQuZdVN0csk-xn2pSfSBLo94UPxgBbGQT3BlbkFJtWVT1jPhXwGhQuZdVN0c",
     "modules": [
         "tutorial/fic/fic_counter",
         "tutorial/fic/fic_loading",

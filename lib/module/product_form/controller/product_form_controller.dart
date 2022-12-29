@@ -13,6 +13,7 @@ class ProductFormController extends State<ProductFormView>
   late int quantity;
   late String category;
   late String description;
+  bool editMode = false;
 
   @override
   void initState() {
@@ -42,5 +43,15 @@ class ProductFormController extends State<ProductFormView>
     setState(() {});
     Get.back();
     showInfoDialog("Success Add Product");
+  }
+
+  update(index, item) async {
+    LocalProductService.update(index, item);
+
+    print("ITEM ========= $item");
+    setState(() {});
+
+    Get.back();
+    showInfoDialog("Update Success");
   }
 }
