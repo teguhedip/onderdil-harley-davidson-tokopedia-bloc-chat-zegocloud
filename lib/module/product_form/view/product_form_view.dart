@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:example/core.dart';
 
@@ -27,50 +25,60 @@ class ProductFormView extends StatefulWidget {
               QImagePicker(
                 label: "Photo",
                 hint: "Your photo",
-                //validator: Validator.required,
-                value: controller.editMode ? item!["photo"] : null,
+                validator: Validator.required,
+                value:
+                    controller.editMode ? item!["photo"] : controller.imageUrl,
                 onChanged: (value) {
                   controller.imageUrl = value;
                 },
               ),
               QTextField(
                 label: "Product name",
-                //validator: Validator.required,
-                value: controller.editMode ? item!["product_name"] : null,
+                validator: Validator.required,
+                value: controller.editMode
+                    ? item!["product_name"]
+                    : controller.productName,
                 onChanged: (val) {
-                  log("val Product name $val");
+                  print("Procut Name $val");
                   controller.productName = val;
                 },
               ),
               QNumberField(
                 label: "Price",
-                //validator: Validator.required,
-                value: controller.editMode ? item!["price"].toString() : null,
+                validator: Validator.required,
+                value: controller.editMode
+                    ? item!["price"].toString()
+                    : controller.price.toString(),
                 onChanged: (val) {
-                  controller.price = int.parse(val);
+                  controller.price = double.parse(val);
                 },
               ),
               QNumberField(
                 label: "Quantity",
-                //validator: Validator.required,
-                value:
-                    controller.editMode ? item!["quantity"].toString() : null,
+                validator: Validator.required,
+                value: controller.editMode
+                    ? item!["quantity"].toString()
+                    : controller.quantity.toString(),
                 onChanged: (val) {
                   controller.quantity = int.parse(val);
                 },
               ),
               QTextField(
                 label: "Category",
-                //validator: Validator.required,
-                value: controller.editMode ? item!["category"] : null,
+                validator: Validator.required,
+                value: controller.editMode
+                    ? item!["category"]
+                    : controller.category,
                 onChanged: (value) {
                   controller.category = value;
                 },
               ),
               QTextField(
                 label: "Description",
-                //validator: Validator.required,
-                value: controller.editMode ? item!["description"] : null,
+                validator: Validator.required,
+                value: controller.editMode
+                    ? item!["description"]
+                    : controller.description,
                 onChanged: (value) {
                   controller.description = value;
                 },

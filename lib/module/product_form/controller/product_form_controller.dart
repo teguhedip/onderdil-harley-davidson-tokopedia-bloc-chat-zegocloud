@@ -6,14 +6,16 @@ class ProductFormController extends State<ProductFormView>
   static late ProductFormController instance;
   late ProductFormView view;
 
-  late int id;
-  late String imageUrl;
-  late String productName;
-  late int price;
-  late int quantity;
-  late String category;
-  late String description;
+  int? id;
+  String? imageUrl;
+  String? productName;
+  double price = 0;
+  int quantity = 0;
+  String? category;
+  String? description;
   bool editMode = false;
+
+  var uuid = const Uuid();
 
   @override
   void initState() {
@@ -30,7 +32,7 @@ class ProductFormController extends State<ProductFormView>
   add() async {
     LocalProductService.add(
       {
-        "id": const Uuid(),
+        "id": uuid.v4(),
         "photo": imageUrl,
         "product_name": productName,
         "price": price,
@@ -46,6 +48,20 @@ class ProductFormController extends State<ProductFormView>
   }
 
   update(index, item) async {
+    // print(" PRODUCT NAME ======= $productName");
+    item["photo"] = imageUrl ?? item["photo"];
+    item["product_name"] = productName ?? item["product_name"];
+    item["price"] = price > 0 ? price : item["price"];
+    item["quantity"] = quantity > 0 ? quantity : item["quantity"];
+    item["category"] = category ?? item["category"];
+    item["description"] = description ?? item["description"];
+
+    // print(" Price ======= $price");
+
+    // print(" ======= $quantity");
+    // print(" ======= $category");
+    // print(" ======= $description");
+
     LocalProductService.update(index, item);
 
     print("ITEM ========= $item");

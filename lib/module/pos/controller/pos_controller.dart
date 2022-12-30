@@ -13,8 +13,8 @@ class PosController extends State<PosView> implements MvcController {
   final products = LocalProductService.products;
 
   late String paymentMethod;
-  late double total;
-  late double poin;
+  double total = 0;
+  double poin = 0;
 
   @override
   void initState() {
@@ -166,9 +166,14 @@ class PosController extends State<PosView> implements MvcController {
     }
   ];
 
-  doCheckout() async {
+  countPoin() async {
     total = OrderService.total;
     poin = total * (10 / 100);
+  }
+
+  doCheckout() async {
+    // total = OrderService.total;
+    // poin = total * (10 / 100);
 
     //Atur point menjadi 10% dari total
 

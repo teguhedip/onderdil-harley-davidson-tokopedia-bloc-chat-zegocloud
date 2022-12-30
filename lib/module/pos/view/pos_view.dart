@@ -48,6 +48,7 @@ class PosView extends StatefulWidget {
                                     if (item["qty"] > 0) {
                                       item["quantity"]++;
                                       item["qty"]--;
+                                      controller.countPoin();
                                       controller.setState(() {});
                                       // controller.totalProduct(
                                       //     item["qty"], item["price"]);
@@ -81,6 +82,7 @@ class PosView extends StatefulWidget {
                                     if (item["quantity"] > 0) {
                                       item["quantity"]--;
                                       item["qty"]++;
+                                      controller.countPoin();
                                       controller.setState(() {});
 
                                       // controller.totalProduct(
@@ -141,15 +143,31 @@ class PosView extends StatefulWidget {
                 ],
               ),
             ),
-            Container(
-              alignment: Alignment.centerRight,
-              child: Text(
-                "Total: ${OrderService.total}",
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+            Row(
+              children: [
+                Container(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    "Total: ${OrderService.total}",
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
-              ),
+                const Spacer(),
+                Container(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    "Poin (10%): ${controller.poin.toStringAsFixed(2)}",
+                    style: const TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue,
+                    ),
+                  ),
+                ),
+              ],
             ),
             Container(
               padding: const EdgeInsets.all(12.0),

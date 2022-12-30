@@ -34,6 +34,7 @@ class ProductListView extends StatefulWidget {
                 shrinkWrap: true,
                 itemBuilder: (BuildContext context, int index) {
                   var item = controller.products[index];
+                  print("ITEM ID ${item["id"]}");
                   return InkWell(
                     onTap: () {
                       controller.delete(item);
