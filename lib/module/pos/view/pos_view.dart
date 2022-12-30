@@ -114,6 +114,7 @@ class PosView extends StatefulWidget {
                       label: "Payment",
                       hint: "Your payment method",
                       validator: Validator.required,
+                      value: "Cash",
                       items: const [
                         {
                           "label": "Cash",

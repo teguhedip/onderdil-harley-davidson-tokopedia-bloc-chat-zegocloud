@@ -15,4 +15,11 @@ class OrderService {
     }
     return total;
   }
+
+  static List productsCheckout() {
+    var productsFilter = products
+        .where((i) => i["qty"] > 0)
+        .toList(); //Filter produk hanya yang sudah di chekout
+    return productsFilter;
+  }
 }
