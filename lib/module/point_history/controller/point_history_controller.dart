@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:example/core.dart';
 import 'package:flutter/material.dart';
 
@@ -6,12 +9,14 @@ class PointHistoryController extends State<PointHistoryView>
   static late PointHistoryController instance;
   late PointHistoryView view;
 
-  late Stream<List> stream;
-
+  // final Stream<QuerySnapshot> pointRecords = FirebaseFirestore.instance.collection('points').snapshots();
+  late Stream<QuerySnapshot> pointRecords;
+  late final dataLocalHistory = LocalHistoryService.point;
   @override
   void initState() {
     instance = this;
-    stream = dataPoint();
+    pointRecords = FirebaseFirestore.instance.collection('points').snapshots();
+
     super.initState();
   }
 
@@ -21,7 +26,9 @@ class PointHistoryController extends State<PointHistoryView>
   @override
   Widget build(BuildContext context) => widget.build(context, this);
 
-  Stream<List> dataPoint() async* {
-    yield LocalHistoryService.point;
+  pirntHistory() {
+    // print("data history **** $dataLocalHistory");
+    log("Print history 888888888");
+    log("Print history 888 $dataLocalHistory");
   }
 }

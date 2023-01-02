@@ -28,4 +28,8 @@ class LocalHistoryService {
     point[index] = newProduct;
     await save();
   }
+
+  static reset() async {
+    await mainStorage.delete("history");
+  }
 }

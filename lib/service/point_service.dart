@@ -1,5 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:example/service/user_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+DocumentReference get pointsCollection {
+  return FirebaseFirestore.instance
+      .collection("points")
+      .doc(FirebaseAuth.instance.currentUser!.uid);
+}
 
 class PointService {
   static addPoint({

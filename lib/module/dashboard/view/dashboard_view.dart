@@ -154,7 +154,8 @@ class DashboardView extends StatefulWidget {
                               "icon": Icons.star,
                               "color": CurrentTheme.mainColor,
                               "header": "Point",
-                              "balance": "${item["point"] ?? 0}",
+                              "balance":
+                                  "${item["point"].toStringAsFixed(2) ?? 0}",
                               "info": "Tap for history",
                             },
                           ];
