@@ -48,7 +48,6 @@ class ProductFormController extends State<ProductFormView>
   }
 
   update(index, item) async {
-    // print(" PRODUCT NAME ======= $productName");
     item["photo"] = imageUrl ?? item["photo"];
     item["product_name"] = productName ?? item["product_name"];
     item["price"] = price > 0 ? price : item["price"];

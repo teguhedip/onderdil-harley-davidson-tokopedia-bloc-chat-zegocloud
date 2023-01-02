@@ -80,10 +80,26 @@ class DashboardController extends State<DashboardView>
     log(obj.toString());
     log(obj.toString());
 
+    //TODO -> SEND data obj to local storage history
+
+    print("OBJ TOTAL ==== ${obj["total"]}");
+    print("OBJ POIN ==== ${obj["point"]}");
+    print("OBJ VENDOR ==== ${obj["vendor"]["email"]}");
+
+    await LocalHistoryService.add(
+      {
+        "id": obj["vendor"]["id"],
+        "total": obj["total"],
+        "point": obj["point"],
+        "vendor": obj["vendor"]["email"],
+      },
+    );
+
     await PointService.addPoint(
       point: double.parse("${obj["point"] ?? 0}"),
       total: double.parse("${obj["total"] ?? 0}"),
     );
     showInfoDialog("Your order is success!!!\n $qrCode");
+    // await showInfoDialog("data pada LocalHistory!!!\n ${LocalHistoryService.point}");
   }
 }

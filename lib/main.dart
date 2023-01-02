@@ -17,6 +17,7 @@ void main() async {
   // TG Start
 
   await LocalProductService.load();
+  await LocalHistoryService.load();
   // TG End
 
   return runApp(MaterialApp(

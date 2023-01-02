@@ -1,31 +1,31 @@
-// import "package:example/core.dart";
+// import 'package:example/core.dart';
 import 'local_storage_service.dart';
 
 // Box mainStorage = Hive.box("mainStorage");
 
-class LocalProductService {
-  static List products = [];
+class LocalHistoryService {
+  static List point = [];
 
   static save() async {
-    await mainStorage.put("products", products);
+    await mainStorage.put("history", point);
   }
 
   static load() async {
-    products = await mainStorage.get("products") ?? [];
+    point = await mainStorage.get("history") ?? [];
   }
 
   static add(Map newProduct) async {
-    products.add(newProduct);
+    point.add(newProduct);
     await save();
   }
 
   static delete(Map product) async {
-    products.remove(product);
+    point.remove(product);
     await save();
   }
 
   static update(int index, Map newProduct) async {
-    products[index] = newProduct;
+    point[index] = newProduct;
     await save();
   }
 }

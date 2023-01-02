@@ -160,7 +160,7 @@ class PosView extends StatefulWidget {
                 Container(
                   alignment: Alignment.centerRight,
                   child: Text(
-                    "Poin (10%): ${controller.poin.toStringAsFixed(2)}",
+                    "Poin (10%): ${controller.point.toStringAsFixed(2)}",
                     style: const TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.bold,

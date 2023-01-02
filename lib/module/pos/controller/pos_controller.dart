@@ -14,7 +14,7 @@ class PosController extends State<PosView> implements MvcController {
 
   String paymentMethod = "cash";
   double total = 0;
-  double poin = 0;
+  double point = 0;
 
   @override
   void initState() {
@@ -33,11 +33,11 @@ class PosController extends State<PosView> implements MvcController {
 
   countPoin() async {
     total = OrderService.total;
-    poin = total * (10 / 100);
+    point = total * (10 / 100);
   }
 
   doCheckout() async {
-    print("POIN >>>> $poin");
+    print("POIN >>>> $point");
     print("TOTAL >>>> $total");
     print("PAYMENT METHOD >>>> $paymentMethod");
 
@@ -47,7 +47,7 @@ class PosController extends State<PosView> implements MvcController {
     //Atur point menjadi 10% dari total
     var qrCodeString = jsonEncode({
       "total": total,
-      "point": poin,
+      "point": point,
       "items": productsToQr,
       "payment_method": paymentMethod, //"Dana" | OVO | Gopay
       "vendor": {
@@ -56,6 +56,8 @@ class PosController extends State<PosView> implements MvcController {
         "name": FirebaseAuth.instance.currentUser!.displayName,
       }
     });
+
+    print("qrCodeString ======= $qrCodeString");
 
     await showCustomDialog(
       title: "Order success",
