@@ -99,7 +99,13 @@ class DashboardController extends State<DashboardView>
       point: double.parse("${obj["point"] ?? 0}"),
       total: double.parse("${obj["total"] ?? 0}"),
     );
+
     showInfoDialog("Your order is success!!!\n $qrCode");
+    // showInfoDialogQr(
+    //   vendor: obj["vendor"]["id"],
+    //   total: obj["total"],
+    //   point: obj["point"],
+    // );
     // await showInfoDialog("data pada LocalHistory!!!\n ${LocalHistoryService.point}");
   }
 }

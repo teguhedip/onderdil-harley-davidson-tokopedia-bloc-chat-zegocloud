@@ -28,3 +28,6 @@
 //     expect(find.text('1'), findsOneWidget);
 //   });
 // }
+void main() {
+  print("coba gan");
+}

@@ -30,3 +30,39 @@ Future showInfoDialog(String message) async {
     },
   );
 }
+
+Future showInfoDialogQr({String? vendor, String? total, String? point}) async {
+  await showDialog<void>(
+    context: globalContext,
+    barrierDismissible: true,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Info'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text(
+                "$vendor",
+                style: const TextStyle(
+                  fontSize: 10.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blueGrey,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text("Ok"),
+          ),
+        ],
+      );
+    },
+  );
+}

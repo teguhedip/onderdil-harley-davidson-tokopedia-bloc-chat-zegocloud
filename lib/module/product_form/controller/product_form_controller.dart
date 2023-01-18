@@ -42,9 +42,9 @@ class ProductFormController extends State<ProductFormView>
       },
     );
 
-    setState(() {});
-    Get.back();
+    Get.to(const ProductListView());
     showInfoDialog("Success Add Product");
+    setState(() {});
   }
 
   update(index, item) async {
@@ -64,9 +64,9 @@ class ProductFormController extends State<ProductFormView>
     LocalProductService.update(index, item);
 
     print("ITEM ========= $item");
-    setState(() {});
 
-    Get.back();
+    await Get.to(const ProductListView());
     showInfoDialog("Update Success");
+    setState(() {});
   }
 }

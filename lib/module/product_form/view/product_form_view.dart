@@ -44,7 +44,7 @@ class ProductFormView extends StatefulWidget {
                 },
               ),
               QNumberField(
-                label: "Price",
+                label: "Price | USD",
                 validator: Validator.required,
                 value: controller.editMode
                     ? item!["price"].toString()
@@ -76,6 +76,7 @@ class ProductFormView extends StatefulWidget {
               QTextField(
                 label: "Description",
                 validator: Validator.required,
+                maxLength: 300,
                 value: controller.editMode
                     ? item!["description"]
                     : controller.description,

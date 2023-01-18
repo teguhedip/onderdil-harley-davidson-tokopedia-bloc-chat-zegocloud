@@ -14,7 +14,7 @@ class PointHistoryView extends StatefulWidget {
         actions: [
           IconButton(
             onPressed: () {
-              controller.pirntHistory();
+              // controller.pirntHistory();
               controller.setState(() {});
             },
             icon: const Icon(
@@ -60,11 +60,16 @@ class PointHistoryView extends StatefulWidget {
                         return Card(
                           child: ListTile(
                             leading: CircleAvatar(
-                              backgroundColor: Colors.blueGrey,
+                              backgroundColor:
+                                  const Color.fromARGB(255, 22, 159, 227),
                               child: Text("${index + 1}"),
                             ),
                             title: Text(
                               "Vendor ${firebaseData[index]['user']['email']} ",
+                              style: const TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             subtitle: Text(
                                 "Total ${firebaseData[index]['total']} Point: ${firebaseData[index]['point'].toStringAsFixed(2)}"),
@@ -74,29 +79,33 @@ class PointHistoryView extends StatefulWidget {
                     );
                   })
               : SizedBox(
-                  height: 300,
-                  child: ListView.builder(
-                    itemCount: controller.dataLocalHistory.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      var item = controller.dataLocalHistory[index];
-                      print(
-                          "controller.dataLocalHistory.length 777 ${controller.dataLocalHistory.length}");
-                      return Card(
-                          child: ListTile(
-                        leading: CircleAvatar(
-                          backgroundColor: Colors.grey[200],
-                          child: Text("$index"),
-                        ),
-                        title: Text(
-                          "Vendor: ${item["vendor"]}",
-                          style: const TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        subtitle: Text(
-                            "total ${item["total"].toStringAsFixed(2)} point: ${item["point"].toStringAsFixed(2)} "),
-                      ));
+                  height: 600,
+                  child: ValueListenableBuilder(
+                    valueListenable: controller.dataLocalHistory,
+                    builder: (context, value, child) {
+                      return ListView.builder(
+                        itemCount: controller.dataLocalHistory.value.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          var item = controller.dataLocalHistory.value[index];
+
+                          return Card(
+                              child: ListTile(
+                            leading: CircleAvatar(
+                              backgroundColor: Colors.grey[200],
+                              child: Text("${index + 1}"),
+                            ),
+                            title: Text(
+                              "Vendor: ${item["vendor"]}",
+                              style: const TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            subtitle: Text(
+                                "total ${item["total"].toStringAsFixed(2)} point: ${item["point"].toStringAsFixed(2)} "),
+                          ));
+                        },
+                      );
                     },
                   ),
                 ),
