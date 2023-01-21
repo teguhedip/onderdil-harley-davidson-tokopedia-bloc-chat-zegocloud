@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:example/core.dart';
 
@@ -63,7 +62,7 @@ class ProfileView extends StatefulWidget {
                 // print("firebaseData ===== $firebaseData");
                 // print("firebaseData ===== ${firebaseData[0]['name']}");
                 // print("firebaseData ===== ${firebaseData[0]['email']}");
-                print(" Item Phpoto ====${item["photo"]}");
+                // print(" Item Phpoto ====${item["photo"]}");
 
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -103,8 +102,7 @@ class ProfileView extends StatefulWidget {
                       ),
                       onPressed: () {
                         Get.to(EditProfile(
-                          imageUrl:
-                              FirebaseAuth.instance.currentUser!.photoURL ?? "",
+                          imageUrl: item["photo"] ?? "",
                           profileName: item["name"] ?? "",
                           id: AuthService.currentUser!.uid,
                         ));

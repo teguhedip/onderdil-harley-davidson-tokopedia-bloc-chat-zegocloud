@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:example/core.dart';
+import 'package:example/cubit/history_cubit/history_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DashboardController extends State<DashboardView>
     implements MvcController {
@@ -102,10 +104,12 @@ class DashboardController extends State<DashboardView>
 
     showInfoDialog("Your order is success!!!\n $qrCode");
     // showInfoDialogQr(
-    //   vendor: obj["vendor"]["id"],
+    //   vendor: obj["vendor"]["email"],
     //   total: obj["total"],
     //   point: obj["point"],
     // );
-    // await showInfoDialog("data pada LocalHistory!!!\n ${LocalHistoryService.point}");
+
+    final response = BlocProvider.of<HistoryCubit>(context);
+    response.getHistory();
   }
 }

@@ -39,18 +39,10 @@ class _EditProfileState extends State<EditProfile> {
                 validator: Validator.required,
                 value: widget.imageUrl,
                 onChanged: (value) {
-                  print("php value $value");
+                  // print("php value $value");
                   widget.imageUrl = value;
                 },
               ),
-              // QImagePicker(
-              //   label: "avatar image",
-              //   value: widget.imageUrl,
-              //   onChanged: (value) {
-              //     print("value imageUrl php ========== $value");
-              //     widget.imageUrl = value.toString();
-              //   },
-              // ),
               QTextField(
                 label: "profile name",
                 value: widget.profileName,

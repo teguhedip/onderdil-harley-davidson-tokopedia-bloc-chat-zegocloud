@@ -41,13 +41,9 @@ Future showInfoDialogQr({String? vendor, String? total, String? point}) async {
         content: SingleChildScrollView(
           child: ListBody(
             children: <Widget>[
-              Text(
-                "$vendor",
-                style: const TextStyle(
-                  fontSize: 10.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              Text(vendor ?? "v"),
+              Text(total ?? "t"),
+              Text(point ?? "p"),
             ],
           ),
         ),

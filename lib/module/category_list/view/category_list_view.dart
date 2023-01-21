@@ -13,12 +13,11 @@ class CategoryListView extends StatefulWidget {
         title: const Text("GjCategoryList"),
         actions: const [],
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(10.0),
-          child: Expanded(
-            child: SizedBox(
-              height: 200,
+      body: Container(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          children: [
+            Expanded(
               child: ListView.builder(
                 itemCount: controller.products.length,
                 itemBuilder: (context, index) {
@@ -32,7 +31,7 @@ class CategoryListView extends StatefulWidget {
                 },
               ),
             ),
-          ),
+          ],
         ),
       ),
     );

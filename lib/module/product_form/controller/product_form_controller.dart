@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import "package:example/core.dart";
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../cubit/product_list_cubit/product_list_cubit.dart';
 
 class ProductFormController extends State<ProductFormView>
     implements MvcController {
   static late ProductFormController instance;
   late ProductFormView view;
+
+  final productController =
+      BlocProvider.of<ProductListCubit>(Get.currentContext);
 
   int? id;
   String? imageUrl;
@@ -42,9 +48,10 @@ class ProductFormController extends State<ProductFormView>
       },
     );
 
-    Get.to(const ProductListView());
+    Get.back();
     showInfoDialog("Success Add Product");
-    setState(() {});
+    productController.getProducts();
+    // setState(() {});
   }
 
   update(index, item) async {
@@ -63,10 +70,15 @@ class ProductFormController extends State<ProductFormView>
 
     LocalProductService.update(index, item);
 
-    print("ITEM ========= $item");
+    // print("ITEM ========= $item");
 
-    await Get.to(const ProductListView());
-    showInfoDialog("Update Success");
-    setState(() {});
+    await Get.back();
+    await showInfoDialog("Update Success");
+    productController.getProducts();
+    // setState(() {});
   }
+
+  // updateScreen() {
+  //   setState(() {});
+  // }
 }

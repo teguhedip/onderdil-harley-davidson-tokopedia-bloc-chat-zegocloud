@@ -39,7 +39,7 @@ class ProductFormView extends StatefulWidget {
                     ? item!["product_name"]
                     : controller.productName,
                 onChanged: (val) {
-                  print("Procut Name $val");
+                  // print("Procut Name $val");
                   controller.productName = val;
                 },
               ),
@@ -48,9 +48,9 @@ class ProductFormView extends StatefulWidget {
                 validator: Validator.required,
                 value: controller.editMode
                     ? item!["price"].toString()
-                    : controller.price.toString(),
+                    : controller.price.toString(), //int.tryParse(value) ?? 0;
                 onChanged: (val) {
-                  controller.price = double.parse(val);
+                  controller.price = double.parse(val) ?? 0;
                 },
               ),
               QNumberField(
@@ -60,7 +60,7 @@ class ProductFormView extends StatefulWidget {
                     ? item!["quantity"].toString()
                     : controller.quantity.toString(),
                 onChanged: (val) {
-                  controller.quantity = int.parse(val);
+                  controller.quantity = int.parse(val) ?? 0;
                 },
               ),
               QTextField(

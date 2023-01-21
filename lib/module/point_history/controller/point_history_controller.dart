@@ -12,7 +12,7 @@ class PointHistoryController extends State<PointHistoryView>
   // final Stream<QuerySnapshot> pointRecords = FirebaseFirestore.instance.collection('points').snapshots();
   late Stream<QuerySnapshot> pointRecords;
 
-  late final dataLocalHistory = ValueNotifier(LocalHistoryService.point);
+  // late final dataLocalHistory = ValueNotifier(LocalHistoryService.point);
 
   @override
   void initState() {
@@ -29,9 +29,9 @@ class PointHistoryController extends State<PointHistoryView>
   Widget build(BuildContext context) => widget.build(context, this);
 
   pirntHistory() {
-    print("data history **** $dataLocalHistory");
+    // print("data history **** $dataLocalHistory");
     log("Print history 888888888");
-    showInfoDialog(dataLocalHistory.value.toString());
+    // showInfoDialog(dataLocalHistory.value.toString());
     // log("Print history 888 $dataLocalHistory");
   }
 
